@@ -1,0 +1,13 @@
+scikit-learn
+nltk
+pandas
+joblib
+beautifulsoup4
+urllib3
+flask
+
+
+certifi
+
+
+

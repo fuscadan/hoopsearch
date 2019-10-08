@@ -1,0 +1,17 @@
+.headline {
+    font-size: 1.5em
+}
+
+.date {
+
+}
+
+.summary {
+
+}
+
+hr {
+margin-top: 1rem;
+margin-bottom: 1rem;
+border-top: 1px solid rgba(0, 0, 0, 1)
+}
