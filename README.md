@@ -33,7 +33,7 @@ A concept vector for the given query is also constructed by projecting its bag-o
 
 When validating the results of the search engine (see below), I found that the search engine with LSA performs better than a less sophisticated weighted keyword search.  To understand why this might be, consider the subspace of the bag-of-words vector space spanned by the axes for the words "Kobe" and "Lakers".  On this space we plot, for each document, the number of instances of these words.  We might find that on average, "Lakers" appears twice as often as "Kobe", as illustrated by the line of best fit through the data points.  
 
-![Idea of why LSA performs better than keyword search](link-to-image)
+![Idea of why LSA performs better than keyword search](https://github.com/fuscadan/hoopsearch/blob/master/hoopsearch/static/img/readme/lsa_idea.png)
 
 LSA finds this line of best fit and projects the data onto it.  In addition to a reduction in dimension, this projection has another beneficial effect; since we also project any query vector onto the subspace, any query with the word "Kobe" is treated exactly the same as a query with the words "Kobe Lakers Lakers".  The search query "Kobe" is therefore matched with articles containing the word "Lakers", even though the user didn't specify that explicitly.  In this way, a search engine using LSA can perform better than a simple keyword search.
 
@@ -44,7 +44,7 @@ One measure of the success of a search engine is its "Mean Average Precision".  
 
 Suppose a query is given and each document in the corpus is labelled as being either relevant or non-relevant to that query.  The "Precision at k", denoted P(k), is the fraction of relevant documents that are returned in the first k results.
 
-![Computing Average Precision for a single query](link-to-image)
+![Computing Average Precision for a single query](https://github.com/fuscadan/hoopsearch/blob/master/hoopsearch/static/img/readme/AP.png)
 
 The "Average Precision" AP is computed by taking the average of the values of P(k) for k ranging between 1 and the total number of relevant documents in the corpus.
 
@@ -56,7 +56,7 @@ Due to the large amount of labelling involved, I was only able to compute the Av
 
 for two search engines.  One search engine compared the bag-of-words embedding (weighted by tf-idf) of the query to those of the game articles.  This is essentially keyword search.  The other engine, used by HoopSearch, compares the LSA-generated "concept vector" of a query to those of the game articles.  Here we see that the LSA-powered search engine performs better, with an AP of 87% compared to 71%.
 
-![Comparison of Average Precision for a keyword search and an LSA-powered search](link-to-image)
+![Comparison of Average Precision for a keyword search and an LSA-powered search](https://github.com/fuscadan/hoopsearch/blob/master/hoopsearch/static/img/readme/validation.png)
 
 
 ## Structure of the Repository
