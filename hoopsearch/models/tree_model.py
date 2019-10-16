@@ -3,8 +3,9 @@
 
     @author danie
 
-        train a decision tree model to predict whether a given paragraph from 
-        a game recap article will be promoted to the game summary page.
+    train a decision tree model to predict the most descriptive sentence of a
+    given game article.  That sentence will be ultimately be presented to the
+    user as a summary of the game.
 '''
 
 from sklearn.tree import DecisionTreeClassifier

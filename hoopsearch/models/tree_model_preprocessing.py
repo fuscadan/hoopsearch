@@ -2,15 +2,17 @@
     Created on Wed September  18 2019
 
     @author danie
-        For each game, this script processes every paragraph in its recap 
-        article in the following way:  A feature vector for that paragraph is
-        constructed, and the paragraph is labelled as either similar or 
-        dissimilar to the one-sentence descriptor appearing on the game summary 
-        page.
+    
+    For each game, this script processes every paragraph in its recap article 
+    in the following way:  A feature vector for that paragraph is constructed,
+    and the paragraph is labelled as either similar or dissimilar to the 
+    one-sentence descriptor appearing on the game summary page.  Feature 
+    vectors and their labels are stored in a csv at Xy_DATA_PATH.
+
+    This X-y data is used to train the decision tree model that predicts the
+    most descriptive sentence of a given game article.
 '''
 
-# import sys
-# sys.path.insert(1, '/mnt/c/Users/danie/OneDrive/Documents/Insight/')
 
 import pandas as pd
 import numpy as np

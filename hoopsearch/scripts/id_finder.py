@@ -65,6 +65,11 @@ if __name__ == '__main__':
     # Find ESPN game IDs from the webpages displaying the season schedule of
     # each team.  
     
+    # decide if the list of season schedule urls should come from 
+    # URL_RETRY_PATH (i.e. if you are retrying a previous id scrape that 
+    # missed urls) or if the list of urls should be built from the START_YEAR,
+    # END_YEAR and SEASON_TYPE data supplied in 'constants.py' (i.e. if you
+    # are starting a new id scrape).
     if RETRYING == True:
         file_path = URL_RETRY_PATH
         with open(file_path, 'r') as url_file:
@@ -82,18 +87,23 @@ if __name__ == '__main__':
                     ) 
                 urls.append(url)
 
+    # get a list of game IDs from the list of urls, and get a list of urls
+    # that could not be accessed and need to be retried
     ids, retry = get_ids(urls)
 
+    # save the urls that could not be accessed to URL_RETRY_PATH
     with open(URL_RETRY_PATH, 'w') as err_file:
         for url in retry:
             err_file.write(url + '\n')        
 
+    # either write the scraped game IDs to ID_FILE_PATH or append IDs to an 
+    # existing file if in retry mode
     if RETRYING == True:
-        url_write_mode = 'a'
+        id_write_mode = 'a'
     else:
-        url_write_mode = 'w'
+        id_write_mode = 'w'
 
-    with open(ID_FILE_PATH, url_write_mode) as f:
-        for url in urls:
-            f.write(url + '\n')
+    with open(ID_FILE_PATH, id_write_mode) as f:
+        for id in ids:
+            f.write(id + '\n')
 

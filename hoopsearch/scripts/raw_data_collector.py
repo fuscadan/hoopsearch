@@ -1,18 +1,22 @@
 '''
     simple script to scrape basic NBA game data from ESPN using the 'games' 
     module and store the data in a pandas dataframe. Exports a .csv file at
-    location specified by RAW_DATA_PATH.
-'''
+    location specified by RAW_DATA_PATH.  Web pages to scrape are identified
+    by a list of game IDs in ID_FILE_PATH (defined in constants.py).  IDs for 
+    web pages that could not be accessed are recorded in ID_RETRY_PATH. 
 
-# import sys
-# sys.path.insert(1, '/mnt/c/Users/danie/OneDrive/Documents/Insight/')
+    This script can be run in a 'retry' mode that will scrape game data for
+    the IDs stored in ID_RETRY_PATH.  Retrying is important since web pages 
+    that would not load for certain IDs (the IDs in ID_RETRY_PATH) can often
+    be loaded if you try again. 
+'''
 
 import pandas as pd
 from hoopsearch.common.games import Game
 from hoopsearch.common.constants import (ID_FILE_PATH, ID_RETRY_PATH, 
     RAW_DATA_PATH)
 
-# Set RETRYING to True if you're scraping game IDs from 'error_ids.txt'
+# Set RETRYING to True if you're scraping game info for IDs in 'ID_RETRY_PATH'
 RETRYING = True
 
 def game_scrape(id_list):

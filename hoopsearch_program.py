@@ -1,7 +1,15 @@
+"""
+    Created on Tue October  08 2019
+
+    @author danie
+
+    A version of HoopSearch with no GUI.  Run the file via command line and 
+    enter a search query when prompted to do so.  Results are printed in the 
+    terminal.
+"""
+
 from hoopsearch.models.LSA_model import LemmaTokenizer
 import hoopsearch.common.search_engine as search_engine
-import warnings
-warnings.filterwarnings("ignore")
 
 query = input('Please enter a search query: ')
 results = search_engine.search(query)

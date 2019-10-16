@@ -3,14 +3,11 @@
 
     @author danie
 
-        script to take a given game recap and label each paragraph (which I 
-        think on ESPN are usually 1 sentence long) and label it as either 
-        similar or dissimilar to the one-sentence descriptor appearing on the
-        game summary page.
+    script to take a given game recap and label each paragraph (which I think 
+    on ESPN are usually 1 sentence long) and label it as either similar or 
+    dissimilar to the one-sentence descriptor appearing on the game summary 
+    page. Labels are stored in a csv at LABELLED_DATA_PATH.
 '''
-
-# import sys
-# sys.path.insert(1, '/mnt/c/Users/danie/OneDrive/Documents/Insight/')
 
 import numpy as np
 import pandas as pd

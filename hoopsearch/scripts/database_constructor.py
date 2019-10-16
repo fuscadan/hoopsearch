@@ -7,10 +7,6 @@
     search through
 '''
 
-
-# import sys
-# sys.path.insert(1, '/mnt/c/Users/danie/OneDrive/Documents/Insight/')
-
 import joblib
 import pandas as pd
 import numpy as np
@@ -44,7 +40,8 @@ if __name__ == "__main__":
     ID_LIST = raw_data.index
     LSA = joblib.load(LSA_MODEL_PATH)
 
-    # build the basic game info dataframe
+
+    # build the basic game info dataframe 'df_features'
     df_features = pd.DataFrame()
     for game_id in ID_LIST:
         game = Game(game_id, df=raw_data)
@@ -69,6 +66,9 @@ if __name__ == "__main__":
 
     df_features.to_pickle(FEATURES_PATH)
 
+
+    # build the bag-of-words vector of mentions of team names for each game,
+    # and save those vectors to df_teams
     teams = []
     for game_id in ID_LIST:
         game = Game(game_id, df=raw_data)
@@ -86,12 +86,12 @@ if __name__ == "__main__":
 
     df_teams = pd.DataFrame.sparse.from_spmatrix(teams_array, 
         index=ID_LIST)
-
     df_teams.to_pickle(TEAMS_PATH)
 
 
+    # build the bag-of-words vector of mentions of player names in the 
+    # 'leaders' category for each game, and save those vectors to df_leaders
     leaders = []
-
     for game_id in ID_LIST:
         game = Game(game_id, df=raw_data)
 
@@ -108,12 +108,13 @@ if __name__ == "__main__":
 
     df_leaders = pd.DataFrame.sparse.from_spmatrix(leaders_array, 
         index=ID_LIST)
-
     df_leaders.to_pickle(LEADERS_PATH)
 
 
+    # build the bag-of-words vector of mentions of player names in the 
+    # game recap article for each game, and save those vectors to 
+    # df_article_names
     article_names = []
-
     for game_id in ID_LIST:
         game = Game(game_id, df=raw_data)
         full_article = ''

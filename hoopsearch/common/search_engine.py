@@ -14,7 +14,6 @@ from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 from scipy import sparse
 import pickle
-import dill
 from sklearn.metrics.pairwise import cosine_similarity
 from hoopsearch.common.summarizer import summarize
 from hoopsearch.common.games import Game
@@ -37,7 +36,11 @@ df_art_names = pd.read_pickle(ART_NAMES_PATH)
 raw_data = pd.read_csv(RAW_DATA_PATH, index_col = 0)
 ID_LIST = raw_data.index
 
+
 def search(query, id_search_list = ID_LIST, VALIDATING = False, mode = 'LSA'):
+    # the main search engine function. 
+
+
     global df_players
     global df_art_names
     # parse the query string
@@ -49,8 +52,6 @@ def search(query, id_search_list = ID_LIST, VALIDATING = False, mode = 'LSA'):
     # reduce the search, if possible, to games with teams mentioned in the query
     db_teams = sparse.csr_matrix(df_teams.values)
     similarities = cosine_similarity(q_teams, db_teams)
-
-    # TODO take the IDs that give the maximum similarity
 
     reduced_list = [id_search_list[i] for i in similarities.nonzero()[1]]
 
@@ -75,9 +76,6 @@ def search(query, id_search_list = ID_LIST, VALIDATING = False, mode = 'LSA'):
     # reduce the search, if possible, to games with players mentioned in the query
     db_players = sparse.csr_matrix(df_players.values) 
     similarities = cosine_similarity(q_players, db_players)
-
-    # TODO take the IDs that give the max similarity
-
     reduced_list = [id_search_list[i] for i in similarities.nonzero()[1]]
 
     if len(reduced_list) != 0:
@@ -95,7 +93,6 @@ def search(query, id_search_list = ID_LIST, VALIDATING = False, mode = 'LSA'):
 
     # finally apply LSA context-matching (or BOW similarity) between the query 
     # and the games in the reduced list
-
     if mode == 'LSA':
         LSA_similarities = np.array([cosine_similarity(q_LSA, 
             df_features.loc[game_id]['LSA'])[0][0]

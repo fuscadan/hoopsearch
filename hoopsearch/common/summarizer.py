@@ -18,6 +18,10 @@ def summarize(game_id, raw_data):
     game = Game(game_id, df=raw_data)
     candidates = []
     
+    # for each paragraph in the given game's article, build a feature vector
+    # and send it through the decision tree (model.predict). If the tree 
+    #  
+    # Send that vector 
     for paragraph in game.article:
         X = [[ft.n_names(paragraph),
                 ft.n_teams(paragraph),
