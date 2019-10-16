@@ -7,7 +7,7 @@ A concept-searchable database of NBA games.  Find a game to watch by entering de
 
 Run the file run.py and navigate to http://127.0.0.1:5000/ in a web browser.  You should see a page that looks like this:
 
-![Main search page](link-to-image)
+![Main search page](https://github.com/fuscadan/hoopsearch/blob/master/hoopsearch/static/img/readme/HoopSearch_main.png)
 
 When you enter a search, for example
 
@@ -15,7 +15,7 @@ When you enter a search, for example
 
 the search engine returns up to ten games relevant to the search query, including their headlines, dates, and a summary description.
 
-![Search results](link-to-image)
+![Search results](https://github.com/fuscadan/hoopsearch/blob/master/hoopsearch/static/img/readme/results.png)
 
 
 ## Concept-searchability and Underlying Theory
@@ -24,7 +24,7 @@ The dataset that we work with is the collection of long-form game recap articles
 
 For each article, a bag-of-words representation is constructed (weighted using tf-idf).  Latent semantic analysis is the process of finding the k-dimensional subspace (I used k = 100) that fits best the cloud of data points, and then projecting each data point onto this subspace.  The projected vector is termed the "concept vector" of the document. 
 
-!["Concept vectors" of Latent Semantic Analysis](link-to-image)
+!["Concept vectors" of Latent Semantic Analysis](https://github.com/fuscadan/hoopsearch/blob/master/hoopsearch/static/img/readme/lsa.png)
 
 A concept vector for the given query is also constructed by projecting its bag-of-words representation.  The concept vector for the query is then compared (using cosine similarity) to the concept vectors of each article, and the games with the most similar articles to the query are surfaced.
 
